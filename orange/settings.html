@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Полные настройки Booking Ops." />
+    <title>Настройки — Booking Ops</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/css/tabler.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body data-page="settings" data-title="Настройки">
+    <div class="page">
+      <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-label="Открыть меню"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="sidebar-menu"><div id="bop-sidebar"></div></div>
+        </div>
+      </aside>
+      <div class="page-wrapper">
+        <header class="navbar navbar-expand-md d-none d-md-flex d-print-none bop-topbar"><div class="container-xl" id="bop-topbar"></div></header>
+        <main class="page-body">
+          <div class="container-xl">
+            <div class="row row-cards">
+              <div class="col-lg-3">
+                <div class="list-group bop-settings-nav">
+                  <a class="list-group-item list-group-item-action active" href="#general">Общие</a>
+                  <a class="list-group-item list-group-item-action" href="#monitoring">Мониторинг</a>
+                  <a class="list-group-item list-group-item-action" href="#proxy">Прокси</a>
+                  <a class="list-group-item list-group-item-action" href="#telegram">Telegram</a>
+                  <a class="list-group-item list-group-item-action" href="#storage">Хранение данных</a>
+                  <a class="list-group-item list-group-item-action" href="#backup">Резервное копирование</a>
+                  <a class="list-group-item list-group-item-action" href="#logging">Логирование</a>
+                </div>
+              </div>
+              <div class="col-lg-9">
+                <form id="settings-form">
+                  <article class="card mb-3" id="general">
+                    <div class="card-header"><h2 class="card-title">Общие настройки</h2></div>
+                    <div class="card-body bop-form"><div class="row g-3">
+                      <div class="col-md-6"><label class="form-label">Название панели</label><input class="form-control" name="panelName" value="Booking Ops" required /></div>
+                      <div class="col-md-6"><label class="form-label">Часовой пояс</label><select class="form-select" name="timezone"><option>Europe/Moscow (UTC+3)</option><option>Europe/Madrid (UTC+2)</option><option>Europe/Rome (UTC+2)</option></select></div>
+                      <div class="col-12"><label class="form-check form-switch"><input class="form-check-input" type="checkbox" name="showDemo" checked /><span class="form-check-label">Показывать демо-плашки</span></label></div>
+                    </div></div>
+                  </article>
+                  <article class="card mb-3" id="monitoring">
+                    <div class="card-header"><h2 class="card-title">Мониторинг</h2></div>
+                    <div class="card-body bop-form"><div class="row g-3">
+                      <div class="col-md-6"><label class="form-label">Интервал проверки по умолчанию</label><select class="form-select" name="monitorInterval"><option>60 секунд</option><option>90 секунд</option><option>120 секунд</option></select></div>
+                      <div class="col-md-6"><label class="form-label">Стратегия повторов</label><select class="form-select" name="retryStrategy"><option>Экспоненциальная · 5 попыток</option><option>Фиксированная · 3 попытки</option><option>Без повторов</option></select></div>
+                      <div class="col-12"><label class="form-check form-switch"><input class="form-check-input" type="checkbox" name="continueOnError" checked /><span class="form-check-label">Продолжать мониторинг при ошибке записи</span></label></div>
+                    </div><div class="alert alert-warning mt-3 mb-0"><i class="ti ti-shield-check me-2"></i>Изменение параметров мониторинга требует подтверждения оператора.</div></div>
+                  </article>
+                  <article class="card mb-3" id="proxy">
+                    <div class="card-header"><h2 class="card-title">Прокси</h2></div>
+                    <div class="card-body bop-form"><div class="row g-3">
+                      <div class="col-md-6"><label class="form-label">Пул по умолчанию</label><select class="form-select" name="proxyPool"><option>Автоматический по стране</option><option>ES-proxy-pool</option><option>FR-proxy-pool</option><option>IT-proxy-pool</option></select></div>
+                      <div class="col-md-6"><label class="form-label">Порог деградации, %</label><input class="form-control" name="proxyThreshold" type="number" value="70" min="0" max="100" required /><div class="form-hint">От 0 до 100 процентов.</div></div>
+                      <div class="col-12"><label class="form-check form-switch"><input class="form-check-input" type="checkbox" name="excludeUnavailable" checked /><span class="form-check-label">Автоматически исключать недоступные прокси</span></label></div>
+                    </div></div>
+                  </article>
+                  <article class="card mb-3" id="telegram">
+                    <div class="card-header"><h2 class="card-title">Telegram</h2></div>
+                    <div class="card-body bop-form"><div class="row g-3">
+                      <div class="col-md-6"><label class="form-label">Канал уведомлений</label><input class="form-control" name="telegramChannel" value="@booking_ops_alerts" /></div>
+                      <div class="col-md-6"><label class="form-label">Минимальный уровень</label><select class="form-select" name="telegramLevel"><option>Все события</option><option>Только действия оператора</option><option>Только ошибки</option></select></div>
+                      <div class="col-12"><label class="form-check form-switch"><input class="form-check-input" type="checkbox" name="telegramAlerts" checked /><span class="form-check-label">Уведомлять о слоте, CAPTCHA, оплате и успехе</span></label></div>
+                    </div></div>
+                  </article>
+                  <article class="card mb-3" id="storage">
+                    <div class="card-header"><h2 class="card-title">Хранение данных</h2></div>
+                    <div class="card-body bop-form"><div class="row g-3">
+                      <div class="col-md-6"><label class="form-label">Срок хранения журнала</label><select class="form-select" name="logRetention"><option>180 дней</option><option>365 дней</option><option>Бессрочно</option></select></div>
+                      <div class="col-md-6"><label class="form-label">Хранилище подтверждений</label><select class="form-select" name="confirmationStorage"><option>Защищённое хранилище</option><option>Локальное демо-хранилище</option></select></div>
+                      <div class="col-12"><div class="text-secondary small"><i class="ti ti-lock me-1"></i>Платёжные данные должны храниться защищённо; CVV не сохраняется.</div></div>
+                    </div></div>
+                  </article>
+                  <article class="card mb-3" id="backup">
+                    <div class="card-header"><h2 class="card-title">Резервное копирование</h2></div>
+                    <div class="card-body bop-form"><div class="row g-3">
+                      <div class="col-md-6"><label class="form-label">Расписание</label><select class="form-select" name="backupSchedule"><option>Каждый день в 03:00</option><option>Каждую неделю</option></select></div>
+                      <div class="col-md-6"><label class="form-label">Хранить копий</label><input class="form-control" name="backupCopies" type="number" value="30" min="1" max="365" required /></div>
+                    </div></div>
+                  </article>
+                  <article class="card mb-3" id="logging">
+                    <div class="card-header"><h2 class="card-title">Логирование</h2></div>
+                    <div class="card-body bop-form"><div class="row g-3">
+                      <div class="col-md-6"><label class="form-label">Уровень журнала</label><select class="form-select" name="logLevel"><option>Info</option><option>Warning</option><option>Error</option></select></div>
+                      <div class="col-md-6"><label class="form-label">Ротация</label><select class="form-select" name="rotation"><option>Каждый день</option><option>Каждую неделю</option></select></div>
+                      <div class="col-12"><label class="form-check form-switch"><input class="form-check-input" type="checkbox" name="operatorAudit" checked /><span class="form-check-label">Записывать действия оператора</span></label></div>
+                    </div></div>
+                  </article>
+                  <div class="d-flex justify-content-end"><button class="btn btn-primary" type="submit"><i class="ti ti-device-floppy me-1"></i>Сохранить настройки</button></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer class="footer footer-transparent d-print-none"><div class="container-xl text-secondary small">Booking Ops · настройки · демо-режим</div></footer>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
+    <script src="assets/layout.js"></script><script src="assets/app.js"></script>
+    <script>
+      (function () {
+        var form = document.getElementById("settings-form"), saved = window.BOP_APP.read("settings", {});
+        Object.keys(saved).forEach(function (key) {
+          var field = form.elements[key];
+          if (!field) return;
+          if (field.type === "checkbox") field.checked = saved[key] === "on" || saved[key] === true;
+          else field.value = saved[key];
+        });
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (!form.reportValidity()) return;
+          if (!window.confirm("Подтвердить сохранение параметров, включая настройки мониторинга?")) return;
+          var settings = {};
+          Array.from(form.elements).forEach(function (field) {
+            if (!field.name) return;
+            settings[field.name] = field.type === "checkbox" ? field.checked : field.value;
+          });
+          window.BOP_APP.write("settings", settings);
+          window.BOP_APP.toast("Настройки подтверждены и сохранены в демо-режиме");
+        });
+      })();
+    </script>
+  </body>
+</html>
