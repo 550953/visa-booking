@@ -95,3 +95,115 @@ window.BOP_MOCK = (function () {
 
   return { COUNTRIES, STATUSES, CLIENTS, EVENTS, QUEUE, MONITORING, NOTIFICATIONS, statusBadge, countryFlag, priorityBadge };
 })();
+
+
+// Единый источник фейковых данных для Booking Ops (демо, без бэкенда)
+
+const FLAGS = {
+  "Италия": "🇮🇹", "Франция": "🇫🇷", "Германия": "🇩🇪", "Испания": "🇪🇸",
+  "Греция": "🇬🇷", "Португалия": "🇵🇹", "Нидерланды": "🇳🇱", "Австрия": "🇦🇹"
+};
+
+const CLIENTS = [
+  { id: 1, fullName: "Иванов Пётр Сергеевич", country: "Италия", status: "success", createdAt: "2026-07-28",
+    birthDate: "1990-04-12", phone: "+7 916 123-45-67", email: "p.ivanov@example.com", visaType: "Туристическая (C)",
+    passport: { series: "45 12", number: "334455", issued: "2021-03-10", expires: "2031-03-10" },
+    photo: true, video: "video_1.mp4",
+    login: "p.ivanov", password: "Xk9!mQ2v", authDate: "2026-08-02 14:12", sessionStatus: "Активна",
+    payment: { holder: "PETR IVANOV", card: "•••• •••• •••• 4471", expires: "09/28", status: "Оплачено" },
+    history: [
+      { time: "2026-08-10 09:14", text: "Запись подтверждена консульством" },
+      { time: "2026-08-05 11:02", text: "Запущен мониторинг слотов" },
+      { time: "2026-08-02 14:12", text: "Аккаунт авторизован" },
+      { time: "2026-07-28 10:40", text: "Клиент добавлен в систему" }
+    ] },
+  { id: 2, fullName: "Смирнова Анна Викторовна", country: "Франция", status: "monitoring", createdAt: "2026-08-01",
+    birthDate: "1988-11-02", phone: "+7 903 555-21-09", email: "a.smirnova@example.com", visaType: "Деловая (C)",
+    passport: { series: "46 08", number: "778812", issued: "2020-06-01", expires: "2030-06-01" },
+    photo: true, video: "video_2.mp4",
+    login: "a.smirnova", password: "Ptr!7hZq", authDate: "2026-08-03 09:30", sessionStatus: "Активна",
+    payment: { holder: "ANNA SMIRNOVA", card: "•••• •••• •••• 9012", expires: "02/27", status: "Оплачено" },
+    history: [
+      { time: "2026-08-09 16:40", text: "Прокси Франции переключён (деградация)" },
+      { time: "2026-08-03 09:30", text: "Аккаунт авторизован" },
+      { time: "2026-08-01 12:00", text: "Клиент добавлен в систему" }
+    ] },
+  { id: 3, fullName: "Кузнецов Дмитрий Олегович", country: "Германия", status: "new", createdAt: "2026-08-11",
+    birthDate: "1995-02-19", phone: "+7 926 777-10-33", email: "d.kuznetsov@example.com", visaType: "Туристическая (C)",
+    passport: { series: "47 01", number: "220156", issued: "2022-01-15", expires: "2032-01-15" },
+    photo: false, video: "",
+    login: "", password: "", authDate: "", sessionStatus: "Нет сессии",
+    payment: { holder: "", card: "", expires: "", status: "Не оплачено" },
+    history: [
+      { time: "2026-08-11 08:05", text: "Клиент добавлен в систему" }
+    ] },
+  { id: 4, fullName: "Петрова Ольга Игоревна", country: "Испания", status: "authorized", createdAt: "2026-08-06",
+    birthDate: "1992-07-30", phone: "+7 977 444-88-21", email: "o.petrova@example.com", visaType: "Учебная (D)",
+    passport: { series: "45 99", number: "556677", issued: "2019-09-20", expires: "2029-09-20" },
+    photo: true, video: "video_4.mp4",
+    login: "o.petrova", password: "Lz4@nRw1", authDate: "2026-08-07 18:22", sessionStatus: "Активна",
+    payment: { holder: "OLGA PETROVA", card: "•••• •••• •••• 3345", expires: "11/26", status: "Оплачено" },
+    history: [
+      { time: "2026-08-07 18:22", text: "Аккаунт авторизован" },
+      { time: "2026-08-06 10:15", text: "Клиент добавлен в систему" }
+    ] },
+  { id: 5, fullName: "Соколов Артём Николаевич", country: "Греция", status: "monitoring", createdAt: "2026-07-20",
+    birthDate: "1985-12-05", phone: "+7 915 222-33-44", email: "a.sokolov@example.com", visaType: "Туристическая (C)",
+    passport: { series: "44 21", number: "990011", issued: "2018-05-18", expires: "2028-05-18" },
+    photo: true, video: "video_5.mp4",
+    login: "a.sokolov", password: "Qw3#pLx9", authDate: "2026-07-22 13:00", sessionStatus: "Активна",
+    payment: { holder: "ARTEM SOKOLOV", card: "•••• •••• •••• 6620", expires: "05/27", status: "Оплачено" },
+    history: [
+      { time: "2026-08-12 07:50", text: "Свободный слот не найден, поиск продолжается" },
+      { time: "2026-07-22 13:00", text: "Аккаунт авторизован" },
+      { time: "2026-07-20 09:00", text: "Клиент добавлен в систему" }
+    ] },
+  { id: 6, fullName: "Морозова Екатерина Павловна", country: "Португалия", status: "new", createdAt: "2026-08-12",
+    birthDate: "1998-03-27", phone: "+7 999 111-22-55", email: "e.morozova@example.com", visaType: "Туристическая (C)",
+    passport: { series: "47 55", number: "112233", issued: "2023-02-11", expires: "2033-02-11" },
+    photo: false, video: "",
+    login: "", password: "", authDate: "", sessionStatus: "Нет сессии",
+    payment: { holder: "", card: "", expires: "", status: "Не оплачено" },
+    history: [
+      { time: "2026-08-12 15:30", text: "Клиент добавлен в систему" }
+    ] },
+  { id: 7, fullName: "Волков Игорь Русланович", country: "Нидерланды", status: "success", createdAt: "2026-07-15",
+    birthDate: "1991-06-09", phone: "+7 906 333-99-11", email: "i.volkov@example.com", visaType: "Деловая (C)",
+    passport: { series: "45 30", number: "445566", issued: "2020-10-01", expires: "2030-10-01" },
+    photo: true, video: "video_7.mp4",
+    login: "i.volkov", password: "Vb8$tYm2", authDate: "2026-07-18 10:10", sessionStatus: "Активна",
+    payment: { holder: "IGOR VOLKOV", card: "•••• •••• •••• 7789", expires: "07/28", status: "Оплачено" },
+    history: [
+      { time: "2026-07-25 12:00", text: "Запись подтверждена консульством" },
+      { time: "2026-07-18 10:10", text: "Аккаунт авторизован" },
+      { time: "2026-07-15 09:40", text: "Клиент добавлен в систему" }
+    ] },
+  { id: 8, fullName: "Новикова Мария Дмитриевна", country: "Австрия", status: "authorized", createdAt: "2026-08-09",
+    birthDate: "1993-09-14", phone: "+7 925 666-77-88", email: "m.novikova@example.com", visaType: "Туристическая (C)",
+    passport: { series: "46 77", number: "667788", issued: "2021-11-05", expires: "2031-11-05" },
+    photo: true, video: "video_8.mp4",
+    login: "m.novikova", password: "Fr5&kNp0", authDate: "2026-08-10 08:45", sessionStatus: "Активна",
+    payment: { holder: "MARIA NOVIKOVA", card: "•••• •••• •••• 5521", expires: "03/27", status: "Оплачено" },
+    history: [
+      { time: "2026-08-10 08:45", text: "Аккаунт авторизован" },
+      { time: "2026-08-09 11:20", text: "Клиент добавлен в систему" }
+    ] }
+];
+
+const STATUS_META = {
+  new:         { label: "Новый",        cls: "bop-status-new" },
+  authorized:  { label: "Авторизован",  cls: "bop-status-auth" },
+  monitoring:  { label: "Мониторинг",   cls: "bop-status-mon" },
+  success:     { label: "Успешно",      cls: "bop-status-done" }
+};
+
+function countryFlag(country) {
+  return (FLAGS[country] || "🏳️") + " " + country;
+}
+
+function statusBadge(status) {
+  const m = STATUS_META[status] || { label: status, cls: "bg-secondary-lt text-secondary" };
+  return `<span class="badge ${m.cls}">${m.label}</span>`;
+}
+
+window.BOP_MOCK = { CLIENTS, STATUS_META, countryFlag, statusBadge, FLAGS };
