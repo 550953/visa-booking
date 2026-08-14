@@ -138,3 +138,68 @@
 
   window.BOP_LAYOUT = { icon };
 })();
+
+
+// Рисует сайдбар и топбар на каждой странице (правки навигации — тут)
+
+const NAV = [
+  { page: "dashboard", label: "Дашборд", href: "index.html", icon: "home" },
+  { page: "clients", label: "Клиенты", href: "clients.html", icon: "users" },
+  { page: "queue", label: "Очередь", href: "queue.html", icon: "list-details" },
+  { page: "monitoring", label: "Мониторинг", href: "monitoring.html", icon: "activity" },
+  { page: "notifications", label: "Уведомления", href: "notifications.html", icon: "bell" },
+  { page: "logs", label: "Журнал", href: "logs.html", icon: "history" },
+  { page: "settings", label: "Настройки", href: "settings.html", icon: "settings" }
+];
+
+const ICONS = {
+  home: '<path d="M5 12l-2 0l9 -9l9 9l-2 0"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"/><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"/>',
+  users: '<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0 -3 -3.85"/>',
+  "list-details": '<path d="M13 5h8"/><path d="M13 9h5"/><path d="M13 15h8"/><path d="M13 19h5"/><path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/>',
+  activity: '<path d="M3 12h4l3 8l4 -16l3 8h4"/>',
+  bell: '<path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"/><path d="M9 17v1a3 3 0 0 0 6 0v-1"/>',
+  history: '<path d="M12 8l0 4l2 2"/><path d="M3.05 11a9 9 0 1 1 .5 4"/><path d="M3 4v4h4"/>',
+  settings: '<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"/><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/>'
+};
+
+function renderSidebar(activePage) {
+  const items = NAV.map(n => `
+    <li class="nav-item ${n.page === activePage ? "active" : ""}">
+      <a class="nav-link" href="${n.href}">
+        <span class="nav-link-icon d-md-none d-lg-inline-block">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[n.icon] || ""}</svg>
+        </span>
+        <span class="nav-link-title">${n.label}</span>
+      </a>
+    </li>`).join("");
+
+  document.getElementById("bop-sidebar").innerHTML = `
+    <div class="navbar-brand navbar-brand-autodark px-3 py-2">
+      <span class="h3 mb-0 text-white">Booking Ops</span>
+    </div>
+    <ul class="navbar-nav pt-lg-3">${items}</ul>
+    <div class="px-3 py-3 mt-auto">
+      <span class="bop-demo-badge">демо-данные · в проде — с бэкенда</span>
+    </div>`;
+}
+
+function renderTopbar(title) {
+  document.getElementById("bop-topbar").innerHTML = `
+    <div class="d-flex align-items-center justify-content-between w-100">
+      <div class="h4 mb-0">${title || ""}</div>
+      <div class="d-flex align-items-center gap-2">
+        <span class="avatar avatar-sm" style="background-image:none;background-color:#e7f1ff;color:#2c5cc5;">ОП</span>
+        <div class="d-none d-sm-block">
+          <div class="fw-medium">Оператор</div>
+          <div class="text-secondary small">demo@shikinn.com</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const page = document.body.dataset.page || "";
+  const title = document.body.dataset.title || "";
+  renderSidebar(page);
+  renderTopbar(title);
+});
