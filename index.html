@@ -7,6 +7,42 @@
   <title>Рабочий стол — Booking Ops</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Резервный экран нужен только если index.html открыли прямо из ZIP. */
+    .archive-fallback{min-height:100vh;background:#f6f4ef;color:#26323a;font:14px Arial,"Segoe UI",sans-serif;padding:34px}
+    .archive-fallback[hidden]{display:none}.archive-fallback .af-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:28px}
+    .archive-fallback .af-eyebrow{margin:0 0 8px;color:#287c75;font:10px "Courier New",monospace;text-transform:uppercase;letter-spacing:.11em}
+    .archive-fallback h1{margin:0;font-size:29px;letter-spacing:-.04em}.archive-fallback p{color:#70777b;line-height:1.5}
+    .archive-fallback .af-button{display:inline-flex;align-items:center;justify-content:center;min-height:37px;padding:0 13px;border:1px solid #dfdcd3;border-radius:9px;background:#fbfaf7;color:#26323a;text-decoration:none;font-weight:600;font-size:12px}
+    .archive-fallback .af-banner{padding:22px;background:#26343d;color:#edf2ed;border-radius:12px;margin-bottom:26px}.archive-fallback .af-banner p{margin:7px 0 0;color:rgba(237,242,237,.65)}
+    .archive-fallback .af-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.archive-fallback .af-card{padding:18px;border:1px solid #dfdcd3;border-radius:12px;background:#fbfaf7;box-shadow:0 12px 35px rgba(30,42,50,.06)}
+    .archive-fallback .af-label{color:#70777b;font-size:12px}.archive-fallback .af-value{margin-top:14px;font-size:29px;font-weight:600}.archive-fallback .af-detail{margin-top:5px;color:#37875f;font-size:11px}
+    .archive-fallback .af-lower{display:grid;grid-template-columns:1.45fr .75fr;gap:16px;margin-top:26px}.archive-fallback h2{margin:0;font-size:18px}.archive-fallback .af-card h2{margin-bottom:14px}
+    .archive-fallback .af-row{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid #dfdcd3;font-size:12px}.archive-fallback .af-tag{padding:5px 9px;border-radius:99px;background:#dcefeb;color:#287c75;font-size:10px;font-weight:700}
+    @media(max-width:720px){.archive-fallback{padding:20px 16px}.archive-fallback .af-head{display:block}.archive-fallback .af-button{margin-top:16px}.archive-fallback .af-grid,.archive-fallback .af-lower{grid-template-columns:1fr}.archive-fallback h1{font-size:25px}}
+  </style>
 </head>
-<body><div id="app"></div><script src="app.js"></script></body>
+<body>
+  <div id="app"></div>
+  <div id="archive-fallback" class="archive-fallback" hidden>
+    <div class="af-head"><div><p class="af-eyebrow">Операционная зона · сегодня, 28 июня</p><h1>Рабочий стол</h1><p>Доброе утро, Анна. Система работает стабильно, 3 заявки требуют внимания.</p></div><a class="af-button" href="queue.html">Открыть очередь</a></div>
+    <div class="af-banner"><strong>Смена в активном режиме</strong><p>Вы на линии до 12:30 · 4 оператора онлайн · последняя передача 11:42</p></div>
+    <div class="af-grid">
+      <div class="af-card"><div class="af-label">Активные заявки</div><div class="af-value">8</div><div class="af-detail">+2 за последний час</div></div>
+      <div class="af-card"><div class="af-label">Высокий приоритет</div><div class="af-value">3</div><div class="af-detail">требуют внимания первым</div></div>
+      <div class="af-card"><div class="af-label">Среднее ожидание</div><div class="af-value">7,4 мин</div><div class="af-detail">на 1,2 мин меньше плана</div></div>
+      <div class="af-card"><div class="af-label">Завершено сегодня</div><div class="af-value">47</div><div class="af-detail">92% в пределах SLA</div></div>
+    </div>
+    <div class="af-lower"><div class="af-card"><h2>Очередь записей</h2><div class="af-row"><span>Ткаченко Ольга Игоревна · Италия</span><span class="af-tag">Оплата</span></div><div class="af-row"><span>Иванов Пётр Сергеевич · Испания</span><span class="af-tag">Мониторинг</span></div><div class="af-row"><span>Смирнова Анна Викторовна · Франция</span><span class="af-tag">САРТЧА</span></div><a class="af-button" href="queue.html">Открыть всю очередь</a></div><div class="af-card"><h2>Здоровье системы</h2><div class="af-row"><span>Booking gateway</span><span class="af-tag">Работает</span></div><div class="af-row"><span>Платёжный шлюз</span><span class="af-tag">Работает</span></div><a class="af-button" href="system.html">Все проверки</a></div></div>
+  </div>
+  <script src="app.js"></script>
+  <script>
+    // При открытии отдельного index.html из ZIP WinRAR может не извлечь app.js.
+    // В этом случае показываем автономный стартовый экран вместо белой страницы.
+    if (!document.querySelector(".app-shell")) {
+      document.getElementById("app").hidden = true;
+      document.getElementById("archive-fallback").hidden = false;
+    }
+  </script>
+</body>
 </html>
