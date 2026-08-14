@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Клиенты — Booking Ops</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/css/tabler.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="clients" data-title="Клиенты">
+<div class="page">
+  <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="sidebar-menu">
+        <div id="bop-sidebar"></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="page-wrapper">
+    <header class="navbar navbar-expand-md d-none d-md-flex d-print-none">
+      <div class="container-xl" id="bop-topbar"></div>
+    </header>
+
+    <div class="page-body">
+      <div class="container-xl">
+
+        <div class="row row-cards mb-2">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                  <div class="input-icon" style="max-width:280px;">
+                    <input type="text" id="f-search" class="form-control" placeholder="Поиск по ФИО, email…">
+                    <span class="input-icon-addon">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+                    </span>
+                  </div>
+                  <select id="f-country" class="form-select" style="max-width:180px;">
+                    <option value="">Все страны</option>
+                  </select>
+                  <select id="f-status" class="form-select" style="max-width:180px;">
+                    <option value="">Все статусы</option>
+                    <option value="new">Новый</option>
+                    <option value="authorized">Авторизован</option>
+                    <option value="monitoring">Мониторинг</option>
+                    <option value="success">Успешно</option>
+                  </select>
+                  <span class="bop-demo-badge ms-auto">демо-данные · в проде — с бэкенда</span>
+                  <button class="btn btn-primary" id="btn-add-client">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5l0 14"/><path d="M5 12l14 0"/></svg>
+                    Добавить клиента
+                  </button>
+                </div>
+              </div>
+
+              <div class="card-body border-top py-2 d-none" id="bulk-bar">
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                  <span class="text-secondary" id="bulk-count">Выбрано: 0</span>
+                  <div class="ms-auto d-flex gap-2 flex-wrap">
+                    <button class="btn btn-sm btn-outline-primary">Авторизовать</button>
+                    <button class="btn btn-sm btn-outline-primary">Запустить</button>
+                    <button class="btn btn-sm btn-outline-secondary">Остановить</button>
+                    <button class="btn btn-sm btn-outline-secondary">Экспорт</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-vcenter card-table">
+                  <thead>
+                    <tr>
+                      <th style="width:36px;"><input type="checkbox" class="form-check-input" id="check-all"></th>
+                      <th>ID</th>
+                      <th>ФИО</th>
+                      <th>Страна</th>
+                      <th>Статус</th>
+                      <th>Дата создания</th>
+                      <th class="text-end">Действия</th>
+                    </tr>
+                  </thead>
+                  <tbody id="clients-body">
+                    <tr><td colspan="7" class="p-3"><div class="bop-skel bop-skel-row mb-2"></div></td></tr>
+                    <tr><td colspan="7" class="p-3"><div class="bop-skel bop-skel-row mb-2 w-60"></div></td></tr>
+                    <tr><td colspan="7" class="p-3"><div class="bop-skel bop-skel-row w-40"></div></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="footer footer-transparent d-print-none">
+      <div class="container-xl">
+        <div class="row text-secondary small">
+          <div class="col">Booking Ops · UI-прототип, статические данные, без бэкенда</div>
+          <div class="col-auto">Клиентов в базе: <span id="footer-count">—</span> (демо)</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
+<script src="assets/mock-data.js"></script>
+<script src="assets/layout.js"></script>
+<script>
+const M = window.BOP_MOCK;
+let state = { search: "", country: "", status: "" };
+
+function fillCountryFilter() {
+  const countries = [...new Set(M.CLIENTS.map(c => c.country))].sort();
+  const sel = document.getElementById("f-country");
+  countries.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c; opt.textContent = c;
+    sel.appendChild(opt);
+  });
+}
+
+function getFiltered() {
+  return M.CLIENTS.filter(c => {
+    if (state.search && !(c.fullName.toLowerCase().includes(state.search) || c.email.toLowerCase().includes(state.search))) return false;
+    if (state.country && c.country !== state.country) return false;
+    if (state.status && c.status !== state.status) return false;
+    return true;
+  });
+}
+
+function renderRows() {
+  const rows = getFiltered().map(c => `
+    <tr>
+      <td><input type="checkbox" class="form-check-input row-check" data-id="${c.id}"></td>
+      <td class="text-secondary">#${c.id}</td>
+      <td><a href="client-card.html?id=${c.id}" class="text-reset fw-medium">${c.fullName}</a></td>
+      <td>${M.countryFlag(c.country)}</td>
+      <td>${M.statusBadge(c.status)}</td>
+      <td class="text-secondary">${c.createdAt}</td>
+      <td class="text-end">
+        <div class="btn-list flex-nowrap justify-content-end">
+          <a href="client-card.html?id=${c.id}" class="btn btn-sm btn-outline-secondary">Открыть карточку</a>
+          <button class="btn btn-sm btn-outline-primary">Авторизовать</button>
+          <button class="btn btn-sm btn-outline-primary">Запустить</button>
+        </div>
+      </td>
+    </tr>`).join("");
+
+  document.getElementById("clients-body").innerHTML = rows || `
+    <tr><td colspan="7" class="bop-empty">Ничего не найдено по заданным фильтрам</td></tr>`;
+  document.getElementById("footer-count").textContent = M.CLIENTS.length;
+  bindRowChecks();
+}
+
+function bindRowChecks() {
+  document.querySelectorAll(".row-check").forEach(cb => {
+    cb.addEventListener("change", updateBulkBar);
+  });
+}
+
+function updateBulkBar() {
+  const checked = document.querySelectorAll(".row-check:checked");
+  const bar = document.getElementById("bulk-bar");
+  if (checked.length > 0) {
+    bar.classList.remove("d-none");
+    document.getElementById("bulk-count").textContent = `Выбрано: ${checked.length}`;
+  } else {
+    bar.classList.add("d-none");
+  }
+}
+
+document.getElementById("check-all").addEventListener("change", (e) => {
+  document.querySelectorAll(".row-check").forEach(cb => cb.checked = e.target.checked);
+  updateBulkBar();
+});
+
+document.getElementById("f-search").addEventListener("input", (e) => {
+  state.search = e.target.value.toLowerCase();
+  renderRows();
+});
+document.getElementById("f-country").addEventListener("change", (e) => {
+  state.country = e.target.value;
+  renderRows();
+});
+document.getElementById("f-status").addEventListener("change", (e) => {
+  state.status = e.target.value;
+  renderRows();
+});
+document.getElementById("btn-add-client").addEventListener("click", () => {
+  window.location.href = "client-wizard.html";
+});
+
+fillCountryFilter();
+// Имитация сетевой задержки (skeleton → рендер)
+setTimeout(renderRows, 1000);
+</script>
+</body>
+</html>
