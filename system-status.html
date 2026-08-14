@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Полный статус сервисов Booking Ops." />
+    <title>Статус системы — Booking Ops</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/css/tabler.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body data-page="system-status" data-title="Статус системы">
+    <div class="page">
+      <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-label="Открыть меню"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="sidebar-menu"><div id="bop-sidebar"></div></div>
+        </div>
+      </aside>
+      <div class="page-wrapper">
+        <header class="navbar navbar-expand-md d-none d-md-flex d-print-none bop-topbar"><div class="container-xl" id="bop-topbar"></div></header>
+        <main class="page-body">
+          <div class="container-xl">
+            <div class="alert alert-warning d-flex align-items-start">
+              <i class="ti ti-alert-triangle me-2 mt-1"></i>
+              <div>
+                <strong>Система работает частично.</strong>
+                <div class="small">Прокси и монитор Италии деградируют, остальные компоненты доступны.</div>
+                <div class="small mt-1"><strong>Что делать:</strong> проверить пул прокси и повторить проверку монитора Италии.</div>
+              </div>
+            </div>
+            <div class="row row-cards mb-3">
+              <div class="col-sm-4"><div class="card"><div class="card-body"><div class="text-secondary small">Компонентов в норме</div><div class="h1 mb-0 text-green" id="services-ok">—</div></div></div></div>
+              <div class="col-sm-4"><div class="card"><div class="card-body"><div class="text-secondary small">Доступность</div><div class="h1 mb-0">99.2%</div><div class="text-secondary small">за последние 30 дней</div></div></div></div>
+              <div class="col-sm-4"><div class="card"><div class="card-body"><div class="text-secondary small">Очередь задач</div><div class="h1 mb-0 text-blue">7</div><div class="text-secondary small">состояние сохраняется</div></div></div></div>
+            </div>
+            <div class="row row-cards">
+              <div class="col-lg-8">
+                <article class="card">
+                  <div class="card-header bop-card-header"><h2 class="card-title mb-0">Все системные компоненты</h2><button class="btn btn-sm btn-outline-secondary" id="status-refresh"><i class="ti ti-refresh me-1"></i>Обновить</button></div>
+                  <div class="table-responsive"><table class="table bop-table table-vcenter card-table"><thead><tr><th>Компонент</th><th>Состояние</th><th>Heartbeat</th><th>Uptime</th><th></th></tr></thead><tbody id="services-body"></tbody></table></div>
+                </article>
+              </div>
+              <div class="col-lg-4">
+                <article class="card">
+                  <div class="card-header"><h2 class="card-title">Последние бэкапы</h2></div>
+                  <div class="list-group list-group-flush">
+                    <div class="list-group-item d-flex gap-3"><span class="avatar bg-green-lt text-green"><i class="ti ti-check"></i></span><div class="flex-fill"><strong>14.08.2026 · 03:00</strong><div class="text-secondary small">Полная копия · 18.4 MB · успешно</div><button class="btn btn-link btn-sm px-0" data-restore="14.08.2026 · 03:00">Восстановить</button></div></div>
+                    <div class="list-group-item d-flex gap-3"><span class="avatar bg-green-lt text-green"><i class="ti ti-check"></i></span><div class="flex-fill"><strong>13.08.2026 · 03:00</strong><div class="text-secondary small">Полная копия · 18.1 MB · успешно</div><button class="btn btn-link btn-sm px-0" data-restore="13.08.2026 · 03:00">Восстановить</button></div></div>
+                    <div class="list-group-item d-flex gap-3"><span class="avatar bg-blue-lt text-blue"><i class="ti ti-database-export"></i></span><div><strong>Создать копию</strong><div class="text-secondary small">В демо-режиме без записи на диск</div><button class="btn btn-link btn-sm px-0" id="backup-now">Запустить</button></div></div>
+                  </div>
+                </article>
+                <article class="card mt-3">
+                  <div class="card-header"><h2 class="card-title">Контрольные показатели</h2></div>
+                  <div class="card-body">
+                    <div class="mb-3"><div class="d-flex justify-content-between small"><span>Обнаружение слота</span><strong>1.4 сек / ≤ 2 сек</strong></div><div class="progress mt-2"><div class="progress-bar bg-green" style="width:70%"></div></div></div>
+                    <div><div class="d-flex justify-content-between small"><span>Запуск записи</span><strong>0.7 сек / ≤ 1 сек</strong></div><div class="progress mt-2"><div class="progress-bar bg-blue" style="width:70%"></div></div></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer class="footer footer-transparent d-print-none"><div class="container-xl text-secondary small">Booking Ops · статус системы · демо-режим</div></footer>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
+    <script src="assets/mock-data.js"></script><script src="assets/layout.js"></script><script src="assets/app.js"></script>
+    <script>
+      (function () {
+        var M = window.BOP_MOCK, body = document.getElementById("services-body");
+        function render() {
+          body.innerHTML = M.SERVICES.map(function (service) {
+            var good = service.status === "ok";
+            return '<tr><td><strong>' + service.name + '</strong><div class="text-secondary small">' + service.detail + '</div></td><td><span class="bop-dot ' + (good ? "bop-dot-green" : "bop-dot-yellow") + ' me-2"></span>' + (good ? "Работает" : "Предупреждение") + '</td><td class="text-secondary">' + service.heartbeat + '</td><td class="text-secondary">' + service.uptime + '</td><td><button class="btn btn-sm btn-outline-secondary" data-restart="' + service.name + '">Перезапуск</button></td></tr>';
+          }).join("");
+          document.getElementById("services-ok").textContent = M.SERVICES.filter(function (item) { return item.status === "ok"; }).length + " / " + M.SERVICES.length;
+          body.querySelectorAll("[data-restart]").forEach(function (button) {
+            button.addEventListener("click", function () { window.BOP_APP.toast("Перезапуск " + button.dataset.restart + " отмечен в демо-журнале"); });
+          });
+        }
+        document.getElementById("status-refresh").addEventListener("click", function () {
+          M.SERVICES.forEach(function (service) { service.heartbeat = "только что"; });
+          render();
+          window.BOP_APP.toast("Статус компонентов обновлён");
+        });
+        document.getElementById("backup-now").addEventListener("click", function () { window.BOP_APP.toast("Резервная копия создана в демо-режиме"); });
+        document.querySelectorAll("[data-restore]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            if (!window.confirm("Восстановить демо-состояние из копии " + button.dataset.restore + "?")) return;
+            window.BOP_APP.toast("Запрос на восстановление из копии " + button.dataset.restore + " создан в демо-режиме");
+          });
+        });
+        render();
+      })();
+    </script>
+  </body>
+</html>

@@ -1,48 +1,133 @@
 <!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Операционный центр Booking Ops для команд бронирования.">
-  <title>Рабочий стол — Booking Ops</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Резервный экран нужен только если index.html открыли прямо из ZIP. */
-    .archive-fallback{min-height:100vh;background:#f6f4ef;color:#26323a;font:14px Arial,"Segoe UI",sans-serif;padding:34px}
-    .archive-fallback[hidden]{display:none}.archive-fallback .af-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:28px}
-    .archive-fallback .af-eyebrow{margin:0 0 8px;color:#287c75;font:10px "Courier New",monospace;text-transform:uppercase;letter-spacing:.11em}
-    .archive-fallback h1{margin:0;font-size:29px;letter-spacing:-.04em}.archive-fallback p{color:#70777b;line-height:1.5}
-    .archive-fallback .af-button{display:inline-flex;align-items:center;justify-content:center;min-height:37px;padding:0 13px;border:1px solid #dfdcd3;border-radius:9px;background:#fbfaf7;color:#26323a;text-decoration:none;font-weight:600;font-size:12px}
-    .archive-fallback .af-banner{padding:22px;background:#26343d;color:#edf2ed;border-radius:12px;margin-bottom:26px}.archive-fallback .af-banner p{margin:7px 0 0;color:rgba(237,242,237,.65)}
-    .archive-fallback .af-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.archive-fallback .af-card{padding:18px;border:1px solid #dfdcd3;border-radius:12px;background:#fbfaf7;box-shadow:0 12px 35px rgba(30,42,50,.06)}
-    .archive-fallback .af-label{color:#70777b;font-size:12px}.archive-fallback .af-value{margin-top:14px;font-size:29px;font-weight:600}.archive-fallback .af-detail{margin-top:5px;color:#37875f;font-size:11px}
-    .archive-fallback .af-lower{display:grid;grid-template-columns:1.45fr .75fr;gap:16px;margin-top:26px}.archive-fallback h2{margin:0;font-size:18px}.archive-fallback .af-card h2{margin-bottom:14px}
-    .archive-fallback .af-row{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid #dfdcd3;font-size:12px}.archive-fallback .af-tag{padding:5px 9px;border-radius:99px;background:#dcefeb;color:#287c75;font-size:10px;font-weight:700}
-    @media(max-width:720px){.archive-fallback{padding:20px 16px}.archive-fallback .af-head{display:block}.archive-fallback .af-button{margin-top:16px}.archive-fallback .af-grid,.archive-fallback .af-lower{grid-template-columns:1fr}.archive-fallback h1{font-size:25px}}
-  </style>
-</head>
-<body>
-  <div id="app"></div>
-  <div id="archive-fallback" class="archive-fallback" hidden>
-    <div class="af-head"><div><p class="af-eyebrow">Операционная зона · сегодня, 28 июня</p><h1>Рабочий стол</h1><p>Доброе утро, Анна. Система работает стабильно, 3 заявки требуют внимания.</p></div><a class="af-button" href="queue.html">Открыть очередь</a></div>
-    <div class="af-banner"><strong>Смена в активном режиме</strong><p>Вы на линии до 12:30 · 4 оператора онлайн · последняя передача 11:42</p></div>
-    <div class="af-grid">
-      <div class="af-card"><div class="af-label">Активные заявки</div><div class="af-value">8</div><div class="af-detail">+2 за последний час</div></div>
-      <div class="af-card"><div class="af-label">Высокий приоритет</div><div class="af-value">3</div><div class="af-detail">требуют внимания первым</div></div>
-      <div class="af-card"><div class="af-label">Среднее ожидание</div><div class="af-value">7,4 мин</div><div class="af-detail">на 1,2 мин меньше плана</div></div>
-      <div class="af-card"><div class="af-label">Завершено сегодня</div><div class="af-value">47</div><div class="af-detail">92% в пределах SLA</div></div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Booking Ops — демонстрационный центр управления визовыми записями." />
+    <title>Дашборд — Booking Ops</title>
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="%23206bc4"/><path d="M28 30h44v40H28z" fill="none" stroke="white" stroke-width="8"/><path d="M38 42h24M38 56h16" stroke="white" stroke-width="7" stroke-linecap="round"/></svg>' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/css/tabler.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body data-page="dashboard" data-title="Дашборд">
+    <div class="page">
+      <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-label="Открыть меню"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="sidebar-menu"><div id="bop-sidebar"></div></div>
+        </div>
+      </aside>
+      <div class="page-wrapper">
+        <header class="navbar navbar-expand-md d-none d-md-flex d-print-none bop-topbar"><div class="container-xl" id="bop-topbar"></div></header>
+        <main class="page-body">
+          <div class="container-xl">
+            <div class="row row-deck row-cards mb-3">
+              <div class="col-sm-6 col-lg-3"><article class="card bop-stat-card"><div class="card-body">
+                <div class="bop-card-header"><span class="bop-stat-label">Активные клиенты</span><span class="bop-demo-badge">демо</span></div>
+                <div class="bop-stat-value" id="stat-active">—</div><div class="bop-stat-meta">из 12 в базе</div>
+              </div></article></div>
+              <div class="col-sm-6 col-lg-3"><article class="card bop-stat-card bop-stat-danger"><div class="card-body">
+                <div class="bop-card-header"><span class="bop-stat-label">Требуют действия</span><span class="bop-demo-badge">демо</span></div>
+                <div class="bop-stat-value" id="stat-actions">—</div><div class="bop-stat-meta">срочно</div>
+              </div></article></div>
+              <div class="col-sm-6 col-lg-3"><article class="card bop-stat-card bop-stat-success"><div class="card-body">
+                <div class="bop-card-header"><span class="bop-stat-label">Записей сегодня</span><span class="bop-demo-badge">демо</span></div>
+                <div class="bop-stat-value" id="stat-booked">—</div><div class="bop-stat-meta">успешно подтверждено</div>
+              </div></article></div>
+              <div class="col-sm-6 col-lg-3"><article class="card bop-stat-card bop-stat-warning"><div class="card-body">
+                <div class="bop-card-header"><span class="bop-stat-label">Статус системы</span><span class="bop-demo-badge">демо</span></div>
+                <div class="d-flex align-items-center gap-2 mt-2"><span class="bop-dot bop-dot-yellow bop-dot-pulse"></span><strong>Частично работает</strong></div>
+                <div class="bop-stat-meta mt-2"><a href="monitoring.html">Италия: прокси деградирует</a></div>
+              </div></article></div>
+            </div>
+
+            <div class="row row-deck row-cards">
+              <div class="col-12">
+                <article class="card">
+                  <div class="card-header bop-card-header">
+                    <h2 class="card-title mb-0">Требует действия оператора</h2>
+                    <span class="bop-demo-badge">демо-данные</span>
+                  </div>
+                  <div class="card-body p-0" id="action-list"></div>
+                </article>
+              </div>
+
+              <div class="col-md-6">
+                <article class="card h-100">
+                  <div class="card-header bop-card-header"><h2 class="card-title mb-0">Очередь записи</h2><a href="queue.html" class="text-secondary small">Вся очередь <i class="ti ti-arrow-up-right"></i></a></div>
+                  <div class="table-responsive"><table class="table bop-table table-vcenter card-table">
+                    <thead><tr><th>№</th><th>Клиент</th><th>Приоритет</th></tr></thead>
+                    <tbody id="queue-preview"></tbody>
+                  </table></div>
+                </article>
+              </div>
+
+              <div class="col-md-6">
+                <article class="card h-100">
+                  <div class="card-header bop-card-header"><h2 class="card-title mb-0">Мониторинг по странам</h2><a href="monitoring.html" class="text-secondary small">Подробнее <i class="ti ti-arrow-up-right"></i></a></div>
+                  <div class="card-body" id="monitoring-preview"></div>
+                </article>
+              </div>
+
+              <div class="col-12">
+                <article class="card">
+                  <div class="card-header bop-card-header"><h2 class="card-title mb-0">Последние события</h2><a href="logs.html" class="text-secondary small">Весь журнал <i class="ti ti-arrow-up-right"></i></a></div>
+                  <div class="table-responsive"><table class="table bop-table table-vcenter card-table">
+                    <thead><tr><th>Время</th><th>Клиент</th><th>Страна</th><th>Событие</th></tr></thead>
+                    <tbody id="events-body"></tbody>
+                  </table></div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer class="footer footer-transparent d-print-none"><div class="container-xl text-secondary small d-flex justify-content-between"><span>Booking Ops · UI-прототип</span><span>Статические данные · без бэкенда</span></div></footer>
+      </div>
     </div>
-    <div class="af-lower"><div class="af-card"><h2>Очередь записей</h2><div class="af-row"><span>Ткаченко Ольга Игоревна · Италия</span><span class="af-tag">Оплата</span></div><div class="af-row"><span>Иванов Пётр Сергеевич · Испания</span><span class="af-tag">Мониторинг</span></div><div class="af-row"><span>Смирнова Анна Викторовна · Франция</span><span class="af-tag">САРТЧА</span></div><a class="af-button" href="queue.html">Открыть всю очередь</a></div><div class="af-card"><h2>Здоровье системы</h2><div class="af-row"><span>Booking gateway</span><span class="af-tag">Работает</span></div><div class="af-row"><span>Платёжный шлюз</span><span class="af-tag">Работает</span></div><a class="af-button" href="system.html">Все проверки</a></div></div>
-  </div>
-  <script src="app.js"></script>
-  <script>
-    // При открытии отдельного index.html из ZIP WinRAR может не извлечь app.js.
-    // В этом случае показываем автономный стартовый экран вместо белой страницы.
-    if (!document.querySelector(".app-shell")) {
-      document.getElementById("app").hidden = true;
-      document.getElementById("archive-fallback").hidden = false;
-    }
-  </script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
+    <script src="assets/mock-data.js"></script><script src="assets/layout.js"></script><script src="assets/app.js"></script>
+    <script>
+      (function () {
+        var M = window.BOP_MOCK;
+        var active = M.CLIENTS.filter(function (client) { return ["authorized", "monitoring", "slot_found", "booking", "captcha", "payment", "video", "confirmation", "retry"].indexOf(client.status) !== -1; }).length;
+        var actions = M.EVENTS.filter(function (event) { return event.level === "action"; }).length;
+        var booked = M.CLIENTS.filter(function (client) { return client.status === "booked"; }).length;
+        document.getElementById("stat-active").textContent = active;
+        document.getElementById("stat-actions").textContent = actions;
+        document.getElementById("stat-booked").textContent = booked;
+
+        document.getElementById("action-list").innerHTML = M.EVENTS.filter(function (event) { return event.level === "action"; }).slice(0, 4).map(function (event) {
+          var warning = event.type === "payment" || event.type === "error";
+          return '<div class="d-flex align-items-center gap-3 px-3 py-3 border-bottom bop-action-row ' + (warning ? "warning" : "") + '">' +
+            '<span class="bop-action-icon"><i class="ti ti-' + (event.type === "captcha" ? "shield-lock" : event.type === "payment" ? "credit-card" : event.type === "error" ? "key" : "calendar-event") + '"></i></span>' +
+            '<div class="flex-fill"><div class="fw-semibold"><a href="client-card.html?id=' + event.clientId + '" class="text-reset">' + event.client + '</a> · ' + M.countryName(event.country) + '</div><div class="text-secondary small">' + event.message + '</div></div>' +
+            '<span class="text-secondary small d-none d-lg-inline">' + event.time + '</span><a href="client-card.html?id=' + event.clientId + '" class="btn btn-sm btn-outline-primary">Открыть</a></div>';
+        }).join("");
+
+        document.getElementById("queue-preview").innerHTML = M.QUEUE.slice(0, 4).map(function (item) {
+          return '<tr><td class="text-secondary">' + item.pos + '</td><td><a class="bop-client-name text-reset" href="client-card.html?id=' + item.clientId + '">' + item.client + '</a><div class="text-secondary small">' + M.countryName(item.country) + ' · ' + item.note + '</div></td><td>' + M.priorityBadge(item.priority) + '</td></tr>';
+        }).join("");
+
+        document.getElementById("monitoring-preview").innerHTML = M.MONITORING.map(function (item) {
+          return '<div class="d-flex align-items-center gap-3 py-2"><span class="bop-dot ' + (item.healthy ? "bop-dot-green" : "bop-dot-yellow") + '"></span><div class="flex-fill"><div class="fw-semibold">' + item.name + '</div><div class="text-secondary small">Проверка: ' + item.lastCheck + ' · прокси ' + item.proxyPool + '</div></div><span class="text-secondary small">' + item.activeClients + ' клиентов</span></div>';
+        }).join("");
+
+        document.getElementById("events-body").innerHTML = M.EVENTS.slice(0, 8).map(function (event) {
+          return '<tr><td class="text-secondary">' + event.time + '</td><td><a class="bop-client-name text-reset" href="client-card.html?id=' + event.clientId + '">' + event.client + '</a></td><td>' + M.countryName(event.country) + '</td><td>' + M.eventBadge(event.level) + ' ' + event.message + '</td></tr>';
+        }).join("");
+      })();
+    </script>
+    <script>
+      (function () {
+        var container = document.querySelector("main .container-xl");
+        if (!container || document.body.dataset.page !== "dashboard") return;
+        container.insertAdjacentHTML("beforeend", '<div class="row row-cards mt-3"><div class="col-lg-6"><article class="card h-100"><div class="card-header bop-card-header"><h2 class="card-title mb-0">Активные уведомления</h2><a href="notifications.html" class="text-secondary small">Все уведомления <i class="ti ti-arrow-up-right"></i></a></div><div class="list-group list-group-flush" id="dashboard-notifications"></div></article></div><div class="col-lg-6"><article class="card h-100"><div class="card-header bop-card-header"><h2 class="card-title mb-0">Состояние компонентов</h2><a href="system-status.html" class="text-secondary small">Диагностика <i class="ti ti-arrow-up-right"></i></a></div><div class="card-body" id="dashboard-services"></div></article></div></div>');
+        var M = window.BOP_MOCK;
+        document.getElementById("dashboard-notifications").innerHTML = M.NOTIFICATIONS.filter(function (item) { return !item.read; }).slice(0, 3).map(function (item) { return '<a class="list-group-item list-group-item-action" href="notifications.html"><div class="d-flex justify-content-between gap-2"><strong class="small">' + item.title + '</strong><span class="text-secondary small">' + item.time + '</span></div><div class="text-secondary small mt-1">' + item.body + '</div></a>'; }).join("") || '<div class="p-3 text-secondary small">Нет активных уведомлений</div>';
+        document.getElementById("dashboard-services").innerHTML = M.SERVICES.slice(0, 7).map(function (service) { return '<div class="d-flex align-items-center gap-2 py-1"><span class="bop-dot ' + (service.status === "ok" ? "bop-dot-green" : "bop-dot-yellow") + '"></span><span class="flex-fill small">' + service.name + '</span><span class="text-secondary small">' + (service.status === "ok" ? "Норма" : "Внимание") + '</span></div>'; }).join("");
+        document.querySelectorAll("#action-list .bop-action-row").forEach(function (row) { var button = document.createElement("button"); button.className = "btn btn-sm btn-outline-secondary"; button.textContent = "Обработать"; button.addEventListener("click", function () { window.BOP_APP.toast("Действие отмечено обработанным в демо-режиме"); }); row.appendChild(button); });
+      })();
+    </script>
+  </body>
 </html>

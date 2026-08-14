@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Вход оператора или администратора в Booking Ops." /><title>Вход — Booking Ops</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/css/tabler.min.css" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" /><link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <div class="bop-auth-wrap"><div class="card bop-auth-card"><div class="card-body p-4 p-md-5"><div class="text-center mb-4"><div class="bop-brand-mark mx-auto mb-3"><i class="ti ti-stamp"></i></div><h1 class="h2 mb-1">Booking Ops</h1><div class="text-secondary small">Защищённый вход в центр управления</div></div><form id="login-form" class="bop-form"><div class="mb-3"><label class="form-label">Роль</label><select class="form-select" name="role"><option value="operator">Оператор</option><option value="admin">Администратор</option></select><div class="text-secondary small mt-1">Оператор обрабатывает клиентов; администратор меняет системные параметры.</div></div><div class="mb-3"><label class="form-label">Email</label><input class="form-control" name="email" type="email" value="operator@example.com" required /></div><div class="mb-3"><label class="form-label">Пароль</label><input class="form-control" name="password" type="password" value="demo-password" required /></div><label class="form-check mb-3"><input class="form-check-input" type="checkbox" checked /><span class="form-check-label">Запомнить на этом устройстве</span></label><button class="btn btn-primary w-100" type="submit">Войти в демо</button></form><div class="text-center text-secondary small mt-4">Статический экран · данные не отправляются</div></div></div></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script><script src="assets/app.js"></script><script>document.getElementById("login-form").addEventListener("submit", function (event) { event.preventDefault(); window.BOP_APP.write("session", { role: new FormData(event.target).get("role"), email: new FormData(event.target).get("email") }); window.BOP_APP.toast("Вход выполнен в демо-режиме"); window.setTimeout(function () { window.location.href = "index.html"; }, 700); });</script>
+  </body>
+</html>
