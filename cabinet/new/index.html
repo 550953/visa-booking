@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Новая заявка — Fast-Bot</title>
+  <link rel="icon" href="../favicon.svg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html"><span class="brand-mark">▣</span><span><strong>Fast-Bot</strong><small>визовые записи</small></span></a>
+      <div class="nav-label">Кабинет</div>
+      <nav><a class="nav-link" href="../index.html"><span class="nav-icon">▦</span>Обзор</a><a class="nav-link active" href="index.html"><span class="nav-icon">＋</span>Новая заявка</a></nav>
+      <div class="nav-label">Аккаунт</div><nav><a class="nav-link" href="../settings/index.html"><span class="nav-icon">⚙</span>Настройки</a></nav>
+      <div class="demo-note"><strong>Демо-режим</strong><p>Данные сохраняются только в этом браузере.</p></div>
+    </aside>
+    <div class="main">
+      <header class="topbar"><div><p class="eyebrow">Личный кабинет</p><h1 class="top-title">Детали заявки</h1></div><div class="account"><span class="account-status">Демо-данные</span><span class="avatar">АС</span><span class="account-name"><strong>Алексей Смирнов</strong><small>Заявитель</small></span></div></header>
+      <main class="content subpage">
+        <div class="subhead"><div><a class="back" href="../index.html">←&nbsp; Все заявки</a><h2>Новая заявка</h2><p>Заполните данные в несколько шагов. Ничего не спишется без подтверждения.</p></div><span class="button secondary">▣&nbsp; Безопасная форма</span></div>
+        <div class="stepper"><div class="step active" data-step="1"><span class="step-number">1</span>Направление</div><div class="step" data-step="2"><span class="step-number">2</span>Заявители</div><div class="step" data-step="3"><span class="step-number">3</span>Период</div><div class="step" data-step="4"><span class="step-number">4</span>Оплата</div></div>
+        <div class="new-layout">
+          <section class="card">
+            <div data-form-step="1"><h3 class="card-title">Куда планируете поездку?</h3><div class="card-body"><p class="muted-copy">Выберите страну и тип визы для подачи документов.</p><div class="form-grid"><div class="field"><label>Страна подачи</label><select class="form-control" data-field="country" required><option value="Италия">Италия</option><option value="Испания">Испания</option><option value="Франция">Франция</option></select></div><div class="field"><label>Тип визы</label><select class="form-control" data-field="visa" required><option value="Туристическая">Туристическая</option><option value="Деловая">Деловая</option><option value="Студенческая">Студенческая</option></select></div></div><div class="form-note">ⓘ Мы подберём доступный визовый центр автоматически. После создания заявки вы сможете изменить данные до начала обработки.</div><div class="form-actions"><button class="button ghost" type="button" data-prev-step>Отмена</button><button class="button" type="button" data-next-step>Продолжить&nbsp; →</button></div></div></div>
+            <div data-form-step="2" hidden><h3 class="card-title">Кто подаёт документы?</h3><div class="card-body"><p class="muted-copy">Укажите данные заявителя, на которого оформляется запись.</p><div class="form-grid"><div class="field"><label>Имя и фамилия</label><input class="form-control" data-field="name" placeholder="Алексей Смирнов" required></div><div class="field"><label>Email</label><input class="form-control" data-field="email" type="email" placeholder="alexey@example.com" required></div><div class="field"><label>Телефон</label><input class="form-control" data-field="phone" placeholder="+7 999 245-18-62" required></div></div><div class="form-actions"><button class="button ghost" type="button" data-prev-step>← Назад</button><button class="button" type="button" data-next-step>Продолжить&nbsp; →</button></div></div></div>
+            <div data-form-step="3" hidden><h3 class="card-title">Желаемый период</h3><div class="card-body"><p class="muted-copy">Когда вам нужно попасть в визовый центр?</p><div class="form-grid"><div class="field"><label>Дата начала</label><input class="form-control" data-field="from" type="date" value="2026-08-12" required></div><div class="field"><label>Дата окончания</label><input class="form-control" data-field="to" type="date" value="2026-08-28" required></div></div><div class="form-actions"><button class="button ghost" type="button" data-prev-step>← Назад</button><button class="button" type="button" data-next-step>Продолжить&nbsp; →</button></div></div></div>
+            <div data-form-step="4" hidden><h3 class="card-title">Способ оплаты</h3><div class="card-body"><p class="muted-copy">Выбор метода не списывает деньги. Оплата подтверждается после создания заявки.</p><div class="field"><label>Выберите способ оплаты</label><select class="form-control" data-field="method" required><option value="card">Банковская карта</option><option value="sbp">СБП</option><option value="invoice">Счёт для юрлица</option></select></div><div class="form-note">ⓘ После создания вы попадёте на заполненную заявку, где сможете проверить детали и выбрать действие с оплатой.</div><div class="form-actions"><button class="button ghost" type="button" data-prev-step>← Назад</button><button class="button" type="button" data-next-step>Создать заявку&nbsp; →</button></div></div></div>
+          </section>
+          <aside class="card preview"><h3 class="card-title">Предпросмотр</h3><div class="card-body"><div class="preview-title">Заявка IT · Туристическая</div><div class="preview-line"><span>Заявителей</span><span>1</span></div><div class="preview-line"><span>Желаемый период</span><span>12–28 августа 2026</span></div><div class="preview-line"><span>К оплате</span><span>2 400 ₽</span></div><div class="form-note">ⓘ Вы подтвердите платёж отдельно — заявка не блокируется выбором метода.</div></div></aside>
+        </div>
+        <div class="footer"><span>Fast-Bot · личный кабинет заявителя</span><span>Демо-режим · локальные данные</span></div>
+      </main>
+    </div>
+  </div>
+  <script src="../app.js"></script>
+</body>
+</html>

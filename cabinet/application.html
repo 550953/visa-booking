@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Детали заявки — Fast-Bot</title>
+  <link rel="icon" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-application-page>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="index.html"><span class="brand-mark">▣</span><span><strong>Fast-Bot</strong><small>визовые записи</small></span></a>
+      <div class="nav-label">Кабинет</div><nav><a class="nav-link active" href="index.html"><span class="nav-icon">▦</span>Обзор</a><a class="nav-link" href="new/index.html"><span class="nav-icon">＋</span>Новая заявка</a></nav>
+      <div class="nav-label">Аккаунт</div><nav><a class="nav-link" href="settings/index.html"><span class="nav-icon">⚙</span>Настройки</a></nav>
+      <div class="demo-note"><strong>Демо-режим</strong><p>Данные сохраняются только в этом браузере.</p></div>
+    </aside>
+    <div class="main">
+      <header class="topbar"><div><p class="eyebrow">Личный кабинет</p><h1 class="top-title">Детали заявки</h1></div><div class="account"><span class="account-status">Демо-данные</span><span class="avatar">АС</span><span class="account-name"><strong>Алексей Смирнов</strong><small>Заявитель</small></span></div></header>
+      <main class="content subpage">
+        <div class="subhead"><div><a class="back" href="index.html">←&nbsp; Все заявки</a><h2><span data-application-id>FB-240480</span> <span class="status waiting" data-status-label>Ожидает оплаты</span></h2><p data-application-meta>Италия · Туристическая · создана только что</p></div><span class="more">···</span></div>
+        <div class="detail-alert"><span class="notice-icon">▱</span><div><strong>Подтвердите оплату, чтобы мы начали поиск</strong><p>Сейчас выбран способ «<span data-method-label>Банковская карта</span>», но платёж ещё не выполнен. Заявка остаётся доступной для изменений.</p></div></div>
+        <div class="detail-grid">
+          <div>
+            <section class="card" style="margin-bottom:20px"><div class="section-head"><h2>Ход заявки</h2><p>Прозрачный статус на каждом шаге.</p></div><div class="timeline"><div class="timeline-item"><span class="timeline-dot"></span><div><strong>Заявка создана</strong><p>Данные приняты. Способ оплаты выбран, но деньги не списаны.</p></div><span class="timeline-date" data-timeline-date>только что</span></div></div></section>
+            <section class="card"><div class="section-head"><h2>Заявители</h2></div><div class="people"><div class="person"><span class="person-avatar">♙</span><span><strong data-applicant-name>1</strong><small>Заявитель 1 · документы будут нужны перед визитом</small></span></div></div></section>
+          </div>
+          <aside class="detail-side">
+            <section class="card"><div class="section-head"><h2>Оплата</h2></div><div class="card-body"><div class="payment-line"><span>Способ оплаты<br><strong>▱ <span data-method-label>Банковская карта</span></strong></span><strong class="unpaid">Не оплачено</strong></div><div class="payment-line"><span>Сумма</span><strong data-payment-amount>2 400 ₽</strong></div><div class="form-note">ⓘ Выбор метода не равен оплате. Ничего не списано.</div><button class="button full" type="button" data-open-modal="payment">▣&nbsp; Перейти к оплате</button><button class="button secondary full" style="margin-top:8px" type="button" data-open-modal="payment">Изменить способ оплаты</button></div></section>
+            <section class="card"><div class="section-head"><h2>Параметры записи</h2></div><div class="parameter"><span>Страна подачи</span><strong data-application-country>Италия</strong></div><div class="parameter"><span>Тип визы</span><strong data-application-visa>Туристическая</strong></div><div class="parameter"><span>Желаемый период</span><strong data-date-range>12–28 августа 2026</strong></div></section>
+            <section class="card manage-card"><div class="section-head"><h2>Управление заявкой</h2></div><div class="card-body"><button class="button danger full" type="button" data-open-modal="cancel">↻&nbsp; Отменить без оплаты</button><p class="manage-help">Отмена не создаёт обязательств. Удалить заявку можно после отмены.</p></div></section>
+          </aside>
+        </div>
+        <div class="footer"><span>Fast-Bot · личный кабинет заявителя</span><span>Демо-режим · локальные данные</span></div>
+      </main>
+    </div>
+  </div>
+  <div class="modal-backdrop" data-modal="payment" hidden><section class="modal"><div class="modal-head"><p class="eyebrow">Заявка <span data-application-id>FB-240480</span></p><button class="modal-close" type="button" data-close-modal>×</button><h2>Способ оплаты</h2></div><div class="modal-body"><p class="modal-copy">Выберите удобный способ. На этом шаге деньги не списываются.</p><label class="payment-option selected" data-payment-option><input type="radio" name="payment" value="card" checked><span class="option-icon">▱</span><strong>Банковская карта</strong><span class="option-check">✓</span></label><label class="payment-option" data-payment-option><input type="radio" name="payment" value="sbp"><span class="option-icon">▯</span><strong>СБП</strong><span class="option-check">✓</span></label><label class="payment-option" data-payment-option><input type="radio" name="payment" value="invoice"><span class="option-icon">▥</span><strong>Счёт для юрлица</strong><span class="option-check">✓</span></label></div><div class="modal-actions"><button class="button ghost" type="button" data-close-modal>Отмена</button><button class="button" type="button" data-payment-confirm>Перейти к подтверждению&nbsp; →</button></div></section></div>
+  <div class="modal-backdrop" data-modal="cancel" hidden><section class="modal modal-small"><div class="modal-body cancel-body"><div class="cancel-icon">!</div><div><h2>Отменить заявку?</h2><p>Заявка перейдёт в статус «Отменена». Оплата не выполнялась, деньги не списываются. Вы сможете удалить её позже.</p></div></div><div class="modal-actions"><button class="button ghost" type="button" data-close-modal>Не сейчас</button><button class="button secondary" type="button" data-cancel-confirm>Подтвердить</button></div></section></div>
+  <script src="app.js"></script>
+</body>
+</html>

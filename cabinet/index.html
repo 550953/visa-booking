@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fast-Bot — Мои заявки</title>
+  <link rel="icon" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="index.html"><span class="brand-mark">▣</span><span><strong>Fast-Bot</strong><small>визовые записи</small></span></a>
+      <div class="nav-label">Кабинет</div>
+      <nav>
+        <a class="nav-link active" href="index.html"><span class="nav-icon">▦</span>Обзор</a>
+        <a class="nav-link" href="new/index.html"><span class="nav-icon">＋</span>Новая заявка</a>
+      </nav>
+      <div class="nav-label">Аккаунт</div>
+      <nav><a class="nav-link" href="settings/index.html"><span class="nav-icon">⚙</span>Настройки</a></nav>
+      <div class="demo-note"><strong>Демо-режим</strong><p>Данные сохраняются только в этом браузере.</p></div>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <div><p class="eyebrow">Личный кабинет</p><h1 class="top-title">Мои заявки</h1></div>
+        <div class="account"><span class="account-status">Демо-данные</span><span class="avatar">АС</span><span class="account-name"><strong>Алексей Смирнов</strong><small>Заявитель</small></span></div>
+      </header>
+      <main class="content">
+        <div class="intro"><div><p>Здравствуйте, Алексей. Здесь собраны все ваши обращения.</p><h2 class="page-title">Заявки на запись</h2></div><a class="button" href="new/index.html">＋&nbsp; Новая заявка</a></div>
+        <section class="stats">
+          <div class="stat"><div class="stat-label">Всего заявок</div><div class="stat-value">4</div><div class="stat-meta">за всё время</div></div>
+          <div class="stat"><div class="stat-label">В работе</div><div class="stat-value">3</div><div class="stat-meta">включая поиск слота</div></div>
+          <div class="stat warning"><div class="stat-label">Нужна оплата</div><div class="stat-value">1</div><div class="stat-meta">требует вашего действия</div></div>
+          <div class="stat success"><div class="stat-label">Запись найдена</div><div class="stat-value">1</div><div class="stat-meta">можно готовиться к визиту</div></div>
+        </section>
+        <div class="notice"><div class="notice-copy"><span class="notice-icon">!</span><div><strong>Есть заявка, ожидающая оплаты</strong><p>Выбор способа оплаты не списывает деньги. Откройте заявку и подтвердите платёж только после проверки деталей.</p></div></div><a class="button secondary" href="application.html?id=FB-240318">Проверить</a></div>
+        <div class="hint-row"><div class="hint"><span class="hint-icon">✓</span><div><strong>Не теряйте контроль</strong><p>Мы покажем каждый шаг заявки. Оплата подтверждается только после вашего действия.</p></div></div><div class="hint"><span class="hint-icon">?</span><div><strong>Нужна помощь?</strong><a href="mailto:support@example.com">Написать в поддержку&nbsp; →</a></div></div></div>
+        <section class="table-card">
+          <div class="table-head"><div><strong>Все заявки</strong><p>Следите за статусом и способом оплаты в одном месте.</p></div><div class="filters"><input data-search type="search" placeholder="Поиск"><select data-status-filter><option value="all">Все статусы</option><option value="waiting">Ожидает оплаты</option><option value="work">В работе</option><option value="found">Запись найдена</option><option value="draft">Черновик</option></select></div></div>
+          <div class="table-scroll"><table><thead><tr><th>Заявка</th><th>Направление</th><th>Заявители</th><th>Статус / оплата</th><th>Стоимость</th></tr></thead><tbody>
+            <tr data-application-row data-row-status="waiting" data-search-text="FB-240318 Италия Туристическая Алексей Смирнов Елена Смирнова"><td><strong>FB-240318</strong><small>18 марта 2026, 10:42</small></td><td><strong>Италия</strong><small>Туристическая</small></td><td><strong>♧ 2 заявителя</strong><small>Алексей Смирнов, Елена Смирнова</small></td><td><span class="status waiting">Ожидает оплаты</span><small>▱ Банковская карта</small></td><td><strong>4 800 ₽</strong><a class="table-link" href="application.html?id=FB-240318">Открыть&nbsp; ›</a></td></tr>
+            <tr data-application-row data-row-status="work" data-search-text="FB-240297 Испания Туристическая Мария Воронцова"><td><strong>FB-240297</strong><small>сегодня, 09:16</small></td><td><strong>Испания</strong><small>Туристическая</small></td><td><strong>♧ 1 заявитель</strong><small>Мария Воронцова</small></td><td><span class="status work">В работе</span><small>▯ СБП</small></td><td><strong>2 400 ₽</strong><a class="table-link" href="application.html?id=FB-240297">Открыть&nbsp; ›</a></td></tr>
+            <tr data-application-row data-row-status="found" data-search-text="FB-240251 Франция Деловая Дмитрий Крылов"><td><strong>FB-240251</strong><small>15 марта 2026, 16:04</small></td><td><strong>Франция</strong><small>Деловая</small></td><td><strong>♧ 1 заявитель</strong><small>Дмитрий Крылов</small></td><td><span class="status found">Запись найдена</span><small>▥ Счёт для юрлица</small></td><td><strong>2 400 ₽</strong><a class="table-link" href="application.html?id=FB-240251">Открыть&nbsp; ›</a></td></tr>
+            <tr data-application-row data-row-status="draft" data-search-text="FB-240236 Италия Студенческая Софья Нечаева"><td><strong>FB-240236</strong><small>10 марта 2026, 19:23</small></td><td><strong>Италия</strong><small>Студенческая</small></td><td><strong>♧ 1 заявитель</strong><small>Софья Нечаева</small></td><td><span class="status draft">Черновик</span><small>▱ Банковская карта</small></td><td><strong>2 400 ₽</strong><a class="table-link" href="application.html?id=FB-240236">Открыть&nbsp; ›</a></td></tr>
+          </tbody></table></div>
+          <div class="table-foot">Показано 4 из 4 заявок</div>
+        </section>
+        <div class="footer"><span>Fast-Bot · личный кабинет заявителя</span><span>Демо-режим · локальные данные</span></div>
+      </main>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

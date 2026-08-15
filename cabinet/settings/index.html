@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Настройки — Fast-Bot</title>
+  <link rel="icon" href="../favicon.svg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html"><span class="brand-mark">▣</span><span><strong>Fast-Bot</strong><small>визовые записи</small></span></a>
+      <div class="nav-label">Кабинет</div><nav><a class="nav-link" href="../index.html"><span class="nav-icon">▦</span>Обзор</a><a class="nav-link" href="../new/index.html"><span class="nav-icon">＋</span>Новая заявка</a></nav>
+      <div class="nav-label">Аккаунт</div><nav><a class="nav-link active" href="index.html"><span class="nav-icon">⚙</span>Настройки</a></nav>
+      <div class="demo-note"><strong>Демо-режим</strong><p>Данные сохраняются только в этом браузере.</p></div>
+    </aside>
+    <div class="main">
+      <header class="topbar"><div><p class="eyebrow">Личный кабинет</p><h1 class="top-title">Детали заявки</h1></div><div class="account"><span class="account-status">Демо-данные</span><span class="avatar">АС</span><span class="account-name"><strong>Алексей Смирнов</strong><small>Заявитель</small></span></div></header>
+      <main class="content subpage">
+        <div class="subhead"><div><p class="eyebrow">Ваш профиль</p><h2>Настройки</h2><p>Управляйте контактами и тем, как мы будем сообщать о заявках.</p></div></div>
+        <div class="settings-layout">
+          <aside class="card side-tabs"><a class="side-tab active" href="#profile">♙&nbsp; Профиль</a><a class="side-tab" href="#notifications">♧&nbsp; Уведомления</a><div class="side-divider"></div><div class="privacy">▣&nbsp; Ваши данные не передаются без вашего действия.</div></aside>
+          <form class="settings-main" data-settings-form>
+            <section class="card settings-section" id="profile"><div class="section-head"><h2>Личные данные</h2></div><div class="settings-content"><div class="form-grid"><div class="field"><label>Имя и фамилия</label><input class="form-control" value="Алексей Смирнов"></div><div class="field"><label>Email</label><input class="form-control" value="alexey.smirnov@example.com"></div><div class="field"><label>Телефон</label><input class="form-control" value="+7 999 245-18-62"></div></div></div></section>
+            <section class="card settings-section" id="notifications"><div class="section-head"><h2>Уведомления</h2><p>Выберите, где получать важные изменения.</p></div><div class="settings-content"><label class="check-row"><span><strong>Email-уведомления</strong><small>Статусы заявок и найденные слоты</small></span><input type="checkbox" checked></label><label class="check-row"><span><strong>SMS-уведомления</strong><small>Только срочные изменения</small></span><input type="checkbox"></label><label class="check-row"><span><strong>Напоминания об оплате</strong><small>Не дадим забыть о незавершённом платеже</small></span><input type="checkbox" checked></label></div></section>
+            <div class="settings-actions"><button class="button" type="submit">▣&nbsp; Сохранить изменения</button></div>
+          </form>
+        </div>
+        <div class="footer"><span>Fast-Bot · личный кабинет заявителя</span><span>Демо-режим · локальные данные</span></div>
+      </main>
+    </div>
+  </div>
+  <script src="../app.js"></script>
+</body>
+</html>
