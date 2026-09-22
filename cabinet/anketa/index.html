@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Анкета — Fast-Bot</title>
+  <link rel="icon" href="../favicon.svg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html"><span class="brand-mark">▣</span><span><strong>Fast-Bot</strong><small>визовые записи</small></span></a>
+      <div class="nav-label">Кабинет</div>
+      <nav>
+        <a class="nav-link" href="../index.html"><span class="nav-icon">▦</span>Обзор</a>
+        <a class="nav-link" href="../new/index.html"><span class="nav-icon">＋</span>Новая заявка</a>
+        <a class="nav-link active" href="index.html"><span class="nav-icon">▤</span>Анкета</a>
+      </nav>
+      <div class="nav-label">Аккаунт</div>
+      <nav><a class="nav-link" href="../settings/index.html"><span class="nav-icon">⚙</span>Настройки</a></nav>
+      <div class="demo-note"><strong>Демо-режим</strong><p>Данные сохраняются только в этом браузере.</p></div>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <div><p class="eyebrow">Личный кабинет</p><h1 class="top-title">Анкета заявителя</h1></div>
+        <div class="account"><span class="account-status">Демо-данные</span><span class="avatar">АС</span><span class="account-name"><strong>Алексей Смирнов</strong><small>Заявитель</small></span></div>
+      </header>
+      <main class="content subpage" data-anketa-page>
+
+        <div class="subhead">
+          <div>
+            <p class="eyebrow">Данные для визовой формы</p>
+            <h2>Анкета</h2>
+            <p>Заполните данные заявителя — форма сохраняется в этом браузере автоматически. В конце вы получите провалидированный JSON с 61 полем для подачи.</p>
+          </div>
+          <div class="subhead-actions">
+            <div class="menu-wrap">
+              <button class="button ghost" type="button" id="draftMenuBtn" aria-haspopup="true" aria-expanded="false">▤&nbsp; Черновик ▾</button>
+              <div class="menu-dropdown" id="draftMenu">
+                <div class="menu-hint">Сохраняет/загружает все введённые значения, даже незаполненные обязательные поля — отдельно от итогового JSON внизу.</div>
+                <button class="menu-item" type="button" id="exportDraftBtn"><span class="menu-icon">⇩</span>Скачать файл черновика</button>
+                <button class="menu-item" type="button" id="importDraftBtn"><span class="menu-icon">⇧</span>Загрузить файл черновика</button>
+                <input type="file" id="importDraftInput" accept="application/json,.json" hidden>
+                <div class="menu-sep"></div>
+                <button class="menu-item" type="button" id="clearDraftMenuBtn"><span class="menu-icon">✕</span>Очистить сохранённые данные</button>
+              </div>
+            </div>
+            <button class="button" type="button" id="buildBtn">✓&nbsp; Проверить и сформировать JSON</button>
+          </div>
+        </div>
+
+        <div class="card progress-card">
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="progress-label" id="progressLabel">0 / 50 обязательных полей</div>
+        </div>
+
+        <div class="notice" id="restoreBanner" style="display:none;">
+          <div class="notice-copy"><span class="notice-icon">↺</span><div><strong>Данные восстановлены</strong><p>Найдены ранее введённые данные в этом браузере — они подставлены автоматически.</p></div></div>
+          <button class="button secondary" type="button" id="clearSaved">Очистить и начать заново</button>
+        </div>
+
+        <div class="alert-error" id="errorPanel" style="display:none;">
+          <strong id="errorTitle">Не заполнено или некорректно</strong>
+          <ul id="errorList"></ul>
+        </div>
+
+        <div id="anketaGroups"><!-- рендерится из app.js --></div>
+
+        <section class="card result-card" id="resultPanel" style="display:none;">
+          <div class="section-head"><h2>Готово — данные провалидированы</h2><p>61 поле, формат ключей и дат соответствует исходной форме (даты — ГГГГ-ММ-ДД).</p></div>
+          <div class="card-body">
+            <pre id="jsonOut"></pre>
+            <div class="result-actions">
+              <button class="button" type="button" id="copyJsonBtn">Скопировать JSON</button>
+              <button class="button secondary" type="button" id="downloadJsonBtn">Скачать .json</button>
+            </div>
+          </div>
+        </section>
+
+        <div class="form-note">Поля, отмеченные <span style="color:#b23a2e">*</span>, обязательны. Для полей, где нужна латиница (имена, адреса, должность), вводите сразу латиницей по написанию в загранпаспорте — сервис их не переводит автоматически.</div>
+
+        <div class="footer"><span>Fast-Bot · личный кабинет заявителя</span><span>Демо-режим · локальные данные</span></div>
+      </main>
+    </div>
+  </div>
+  <script src="../app.js"></script>
+</body>
+</html>
