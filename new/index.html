@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Новая заявка — Личный кабинет</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/css/tabler.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div id="layout-mount"></div>
+
+<div class="page-wrapper">
+  <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="text-secondary">Личный кабинет</div>
+      <h2 class="page-title">Новая заявка</h2>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="container-xl">
+      <div class="card">
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Страна назначения</label>
+              <input type="text" class="form-control" id="f_country" placeholder="Италия, Испания…">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Тип визы</label>
+              <select class="form-select" id="f_type">
+                <option>Туристическая</option>
+                <option>Деловая</option>
+                <option>Студенческая</option>
+                <option>Гостевая</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="form-label mt-3">Заявители</label>
+          <div id="applicants-list"></div>
+          <button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="add-applicant">＋ Добавить заявителя</button>
+
+          <div class="row g-3 mt-1">
+            <div class="col-md-6">
+              <label class="form-label">Способ оплаты</label>
+              <select class="form-select" id="f_payment">
+                <option>Банковская карта</option>
+                <option>СБП</option>
+                <option>Счёт для юрлица</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Стоимость, ₽</label>
+              <input type="number" class="form-control" id="f_cost" placeholder="2400" min="0">
+            </div>
+          </div>
+
+          <div class="alert alert-info mt-3">
+            Оплата не списывается при создании заявки — вы подтвердите платёж отдельно, уже в карточке заявки.
+          </div>
+
+          <div class="d-flex mt-3">
+            <button class="btn btn-primary" id="submit-btn">Создать заявку</button>
+            <a href="../index.html" class="btn btn-link ms-2">Отмена</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
+<script src="../assets/mock-data.js"></script>
+<script src="../assets/layout.js"></script>
+<script>
+  renderLayout({ active: 'new', base: '../' });
+
+  function addApplicantRow(value) {
+    const wrap = document.createElement('div');
+    wrap.className = 'input-group mb-2';
+    wrap.innerHTML = `
+      <input type="text" class="form-control applicant-input" placeholder="Имя Фамилия" value="${value ? value.replace(/"/g, '&quot;') : ''}">
+      <button type="button" class="btn btn-outline-danger remove-applicant">✕</button>
+    `;
+    wrap.querySelector('.remove-applicant').addEventListener('click', () => wrap.remove());
+    document.getElementById('applicants-list').appendChild(wrap);
+  }
+
+  document.getElementById('add-applicant').addEventListener('click', () => addApplicantRow(''));
+  addApplicantRow('');
+
+  document.getElementById('submit-btn').addEventListener('click', () => {
+    const country = document.getElementById('f_country').value.trim() || 'Не указано';
+    const visaType = document.getElementById('f_type').value;
+    const paymentMethod = document.getElementById('f_payment').value;
+    const cost = parseInt(document.getElementById('f_cost').value, 10) || 0;
+    const applicants = Array.from(document.querySelectorAll('.applicant-input'))
+      .map((i) => i.value.trim())
+      .filter(Boolean);
+
+    if (!applicants.length) {
+      alert('Добавьте хотя бы одного заявителя');
+      return;
+    }
+
+    const app = {
+      id: CabinetData.nextApplicationId(),
+      createdLabel: 'сегодня',
+      country,
+      visaType,
+      applicants,
+      status: 'draft',
+      paymentMethod,
+      cost,
+    };
+    CabinetData.addApplication(app);
+    window.location.href = '../application.html?id=' + encodeURIComponent(app.id);
+  });
+</script>
+</body>
+</html>

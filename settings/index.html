@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Настройки — Личный кабинет</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/css/tabler.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div id="layout-mount"></div>
+
+<div class="page-wrapper">
+  <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="text-secondary">Личный кабинет</div>
+      <h2 class="page-title">Настройки</h2>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="container-xl">
+      <div class="card">
+        <div class="card-header"><h3 class="card-title">Профиль</h3></div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label">Имя</label><input type="text" class="form-control" placeholder="Алексей Смирнов"></div>
+            <div class="col-md-6"><label class="form-label">Email</label><input type="email" class="form-control" placeholder="you@example.com"></div>
+          </div>
+          <label class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" checked>
+            <span class="form-check-label">Уведомлять по email о смене статуса заявки</span>
+          </label>
+          <div class="mt-3">
+            <button class="btn btn-primary" disabled>Сохранить (демо)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-header"><h3 class="card-title">Демо-данные</h3></div>
+        <div class="card-body">
+          <p class="text-secondary">Все заявки сейчас хранятся только в этом браузере (localStorage). Кнопка ниже сбрасывает их к исходному демо-набору.</p>
+          <button class="btn btn-outline-danger" id="reset-demo">Сбросить демо-данные</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
+<script src="../assets/mock-data.js"></script>
+<script src="../assets/layout.js"></script>
+<script>
+  renderLayout({ active: 'settings', base: '../' });
+
+  document.getElementById('reset-demo').addEventListener('click', () => {
+    window.localStorage.removeItem('cabinet_applications_v1');
+    alert('Демо-данные сброшены');
+    window.location.href = '../index.html';
+  });
+</script>
+</body>
+</html>

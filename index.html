@@ -1,133 +1,183 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Booking Ops — демонстрационный центр управления визовыми записями." />
-    <title>Дашборд — Booking Ops</title>
-    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="%23206bc4"/><path d="M28 30h44v40H28z" fill="none" stroke="white" stroke-width="8"/><path d="M38 42h24M38 56h16" stroke="white" stroke-width="7" stroke-linecap="round"/></svg>' />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/css/tabler.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
-    <link rel="stylesheet" href="assets/style.css" />
-  </head>
-  <body data-page="dashboard" data-title="Дашборд">
-    <div class="page">
-      <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark" data-bs-theme="dark">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-label="Открыть меню"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse" id="sidebar-menu"><div id="bop-sidebar"></div></div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мои заявки — Личный кабинет</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/css/tabler.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="layout-mount"></div>
+
+<div class="page-wrapper">
+  <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="row align-items-center">
+        <div class="col">
+          <div class="text-secondary">Личный кабинет</div>
+          <h2 class="page-title">Мои заявки</h2>
         </div>
-      </aside>
-      <div class="page-wrapper">
-        <header class="navbar navbar-expand-md d-none d-md-flex d-print-none bop-topbar"><div class="container-xl" id="bop-topbar"></div></header>
-        <main class="page-body">
-          <div class="container-xl">
-            <div class="row row-deck row-cards mb-3">
-              <div class="col-sm-6 col-lg-3"><article class="card bop-stat-card"><div class="card-body">
-                <div class="bop-card-header"><span class="bop-stat-label">Активные клиенты</span><span class="bop-demo-badge">демо</span></div>
-                <div class="bop-stat-value" id="stat-active">—</div><div class="bop-stat-meta">из 12 в базе</div>
-              </div></article></div>
-              <div class="col-sm-6 col-lg-3"><article class="card bop-stat-card bop-stat-danger"><div class="card-body">
-                <div class="bop-card-header"><span class="bop-stat-label">Требуют действия</span><span class="bop-demo-badge">демо</span></div>
-                <div class="bop-stat-value" id="stat-actions">—</div><div class="bop-stat-meta">срочно</div>
-              </div></article></div>
-              <div class="col-sm-6 col-lg-3"><article class="card bop-stat-card bop-stat-success"><div class="card-body">
-                <div class="bop-card-header"><span class="bop-stat-label">Записей сегодня</span><span class="bop-demo-badge">демо</span></div>
-                <div class="bop-stat-value" id="stat-booked">—</div><div class="bop-stat-meta">успешно подтверждено</div>
-              </div></article></div>
-              <div class="col-sm-6 col-lg-3"><article class="card bop-stat-card bop-stat-warning"><div class="card-body">
-                <div class="bop-card-header"><span class="bop-stat-label">Статус системы</span><span class="bop-demo-badge">демо</span></div>
-                <div class="d-flex align-items-center gap-2 mt-2"><span class="bop-dot bop-dot-yellow bop-dot-pulse"></span><strong>Частично работает</strong></div>
-                <div class="bop-stat-meta mt-2"><a href="monitoring.html">Италия: прокси деградирует</a></div>
-              </div></article></div>
-            </div>
-
-            <div class="row row-deck row-cards">
-              <div class="col-12">
-                <article class="card">
-                  <div class="card-header bop-card-header">
-                    <h2 class="card-title mb-0">Требует действия оператора</h2>
-                    <span class="bop-demo-badge">демо-данные</span>
-                  </div>
-                  <div class="card-body p-0" id="action-list"></div>
-                </article>
-              </div>
-
-              <div class="col-md-6">
-                <article class="card h-100">
-                  <div class="card-header bop-card-header"><h2 class="card-title mb-0">Очередь записи</h2><a href="queue.html" class="text-secondary small">Вся очередь <i class="ti ti-arrow-up-right"></i></a></div>
-                  <div class="table-responsive"><table class="table bop-table table-vcenter card-table">
-                    <thead><tr><th>№</th><th>Клиент</th><th>Приоритет</th></tr></thead>
-                    <tbody id="queue-preview"></tbody>
-                  </table></div>
-                </article>
-              </div>
-
-              <div class="col-md-6">
-                <article class="card h-100">
-                  <div class="card-header bop-card-header"><h2 class="card-title mb-0">Мониторинг по странам</h2><a href="monitoring.html" class="text-secondary small">Подробнее <i class="ti ti-arrow-up-right"></i></a></div>
-                  <div class="card-body" id="monitoring-preview"></div>
-                </article>
-              </div>
-
-              <div class="col-12">
-                <article class="card">
-                  <div class="card-header bop-card-header"><h2 class="card-title mb-0">Последние события</h2><a href="logs.html" class="text-secondary small">Весь журнал <i class="ti ti-arrow-up-right"></i></a></div>
-                  <div class="table-responsive"><table class="table bop-table table-vcenter card-table">
-                    <thead><tr><th>Время</th><th>Клиент</th><th>Страна</th><th>Событие</th></tr></thead>
-                    <tbody id="events-body"></tbody>
-                  </table></div>
-                </article>
-              </div>
-            </div>
-          </div>
-        </main>
-        <footer class="footer footer-transparent d-print-none"><div class="container-xl text-secondary small d-flex justify-content-between"><span>Booking Ops · UI-прототип</span><span>Статические данные · без бэкенда</span></div></footer>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
-    <script src="assets/mock-data.js"></script><script src="assets/layout.js"></script><script src="assets/app.js"></script>
-    <script>
-      (function () {
-        var M = window.BOP_MOCK;
-        var active = M.CLIENTS.filter(function (client) { return ["authorized", "monitoring", "slot_found", "booking", "captcha", "payment", "video", "confirmation", "retry"].indexOf(client.status) !== -1; }).length;
-        var actions = M.EVENTS.filter(function (event) { return event.level === "action"; }).length;
-        var booked = M.CLIENTS.filter(function (client) { return client.status === "booked"; }).length;
-        document.getElementById("stat-active").textContent = active;
-        document.getElementById("stat-actions").textContent = actions;
-        document.getElementById("stat-booked").textContent = booked;
+  </div>
 
-        document.getElementById("action-list").innerHTML = M.EVENTS.filter(function (event) { return event.level === "action"; }).slice(0, 4).map(function (event) {
-          var warning = event.type === "payment" || event.type === "error";
-          return '<div class="d-flex align-items-center gap-3 px-3 py-3 border-bottom bop-action-row ' + (warning ? "warning" : "") + '">' +
-            '<span class="bop-action-icon"><i class="ti ti-' + (event.type === "captcha" ? "shield-lock" : event.type === "payment" ? "credit-card" : event.type === "error" ? "key" : "calendar-event") + '"></i></span>' +
-            '<div class="flex-fill"><div class="fw-semibold"><a href="client-card.html?id=' + event.clientId + '" class="text-reset">' + event.client + '</a> · ' + M.countryName(event.country) + '</div><div class="text-secondary small">' + event.message + '</div></div>' +
-            '<span class="text-secondary small d-none d-lg-inline">' + event.time + '</span><a href="client-card.html?id=' + event.clientId + '" class="btn btn-sm btn-outline-primary">Открыть</a></div>';
-        }).join("");
+  <div class="page-body">
+    <div class="container-xl">
 
-        document.getElementById("queue-preview").innerHTML = M.QUEUE.slice(0, 4).map(function (item) {
-          return '<tr><td class="text-secondary">' + item.pos + '</td><td><a class="bop-client-name text-reset" href="client-card.html?id=' + item.clientId + '">' + item.client + '</a><div class="text-secondary small">' + M.countryName(item.country) + ' · ' + item.note + '</div></td><td>' + M.priorityBadge(item.priority) + '</td></tr>';
-        }).join("");
+      <div class="row row-cards mb-3" id="stats-row">
+        <div class="col-sm-6 col-lg-3">
+          <div class="card card-sm">
+            <div class="card-body">
+              <div class="text-secondary">Всего заявок</div>
+              <div class="h1 mb-0" id="stat-total">—</div>
+              <div class="text-secondary">за всё время</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="card card-sm">
+            <div class="card-body">
+              <div class="text-secondary">В работе</div>
+              <div class="h1 mb-0" id="stat-progress">—</div>
+              <div class="text-secondary">включая поиск слота</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="card card-sm">
+            <div class="card-body">
+              <div class="text-secondary">Нужна оплата</div>
+              <div class="h1 mb-0" id="stat-payment">—</div>
+              <div class="text-secondary">требует вашего действия</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="card card-sm">
+            <div class="card-body">
+              <div class="text-secondary">Запись найдена</div>
+              <div class="h1 mb-0" id="stat-found">—</div>
+              <div class="text-secondary">можно готовиться к визиту</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        document.getElementById("monitoring-preview").innerHTML = M.MONITORING.map(function (item) {
-          return '<div class="d-flex align-items-center gap-3 py-2"><span class="bop-dot ' + (item.healthy ? "bop-dot-green" : "bop-dot-yellow") + '"></span><div class="flex-fill"><div class="fw-semibold">' + item.name + '</div><div class="text-secondary small">Проверка: ' + item.lastCheck + ' · прокси ' + item.proxyPool + '</div></div><span class="text-secondary small">' + item.activeClients + ' клиентов</span></div>';
-        }).join("");
+      <div id="payment-alert"></div>
 
-        document.getElementById("events-body").innerHTML = M.EVENTS.slice(0, 8).map(function (event) {
-          return '<tr><td class="text-secondary">' + event.time + '</td><td><a class="bop-client-name text-reset" href="client-card.html?id=' + event.clientId + '">' + event.client + '</a></td><td>' + M.countryName(event.country) + '</td><td>' + M.eventBadge(event.level) + ' ' + event.message + '</td></tr>';
-        }).join("");
-      })();
-    </script>
-    <script>
-      (function () {
-        var container = document.querySelector("main .container-xl");
-        if (!container || document.body.dataset.page !== "dashboard") return;
-        container.insertAdjacentHTML("beforeend", '<div class="row row-cards mt-3"><div class="col-lg-6"><article class="card h-100"><div class="card-header bop-card-header"><h2 class="card-title mb-0">Активные уведомления</h2><a href="notifications.html" class="text-secondary small">Все уведомления <i class="ti ti-arrow-up-right"></i></a></div><div class="list-group list-group-flush" id="dashboard-notifications"></div></article></div><div class="col-lg-6"><article class="card h-100"><div class="card-header bop-card-header"><h2 class="card-title mb-0">Состояние компонентов</h2><a href="system-status.html" class="text-secondary small">Диагностика <i class="ti ti-arrow-up-right"></i></a></div><div class="card-body" id="dashboard-services"></div></article></div></div>');
-        var M = window.BOP_MOCK;
-        document.getElementById("dashboard-notifications").innerHTML = M.NOTIFICATIONS.filter(function (item) { return !item.read; }).slice(0, 3).map(function (item) { return '<a class="list-group-item list-group-item-action" href="notifications.html"><div class="d-flex justify-content-between gap-2"><strong class="small">' + item.title + '</strong><span class="text-secondary small">' + item.time + '</span></div><div class="text-secondary small mt-1">' + item.body + '</div></a>'; }).join("") || '<div class="p-3 text-secondary small">Нет активных уведомлений</div>';
-        document.getElementById("dashboard-services").innerHTML = M.SERVICES.slice(0, 7).map(function (service) { return '<div class="d-flex align-items-center gap-2 py-1"><span class="bop-dot ' + (service.status === "ok" ? "bop-dot-green" : "bop-dot-yellow") + '"></span><span class="flex-fill small">' + service.name + '</span><span class="text-secondary small">' + (service.status === "ok" ? "Норма" : "Внимание") + '</span></div>'; }).join("");
-        document.querySelectorAll("#action-list .bop-action-row").forEach(function (row) { var button = document.createElement("button"); button.className = "btn btn-sm btn-outline-secondary"; button.textContent = "Обработать"; button.addEventListener("click", function () { window.BOP_APP.toast("Действие отмечено обработанным в демо-режиме"); }); row.appendChild(button); });
-      })();
-    </script>
-  </body>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Все заявки</h3>
+          <div class="card-actions">
+            <select class="form-select form-select-sm" id="status-filter" style="width:auto">
+              <option value="all">Все статусы</option>
+              <option value="awaiting_payment">Ожидает оплаты</option>
+              <option value="in_progress">В работе</option>
+              <option value="slot_found">Запись найдена</option>
+              <option value="draft">Черновик</option>
+            </select>
+            <a href="new/index.html" class="btn btn-primary ms-2">＋ Новая заявка</a>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table card-table table-vcenter">
+            <thead>
+              <tr>
+                <th>Заявка</th>
+                <th>Направление</th>
+                <th>Заявители</th>
+                <th>Статус / оплата</th>
+                <th>Стоимость</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="applications-tbody">
+              <tr><td colspan="6"><div class="skeleton-line" style="width:60%"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer text-secondary" id="table-footer"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
+<script src="assets/mock-data.js"></script>
+<script src="assets/layout.js"></script>
+<script>
+  renderLayout({ active: 'overview', base: './' });
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function render() {
+    const all = CabinetData.loadApplications();
+    const filter = document.getElementById('status-filter').value;
+    const list = filter === 'all' ? all : all.filter((a) => a.status === filter);
+
+    document.getElementById('stat-total').textContent = all.length;
+    document.getElementById('stat-progress').textContent = all.filter((a) => a.status === 'in_progress' || a.status === 'awaiting_payment').length;
+    document.getElementById('stat-payment').textContent = all.filter((a) => a.status === 'awaiting_payment').length;
+    document.getElementById('stat-found').textContent = all.filter((a) => a.status === 'slot_found').length;
+
+    const pending = all.find((a) => a.status === 'awaiting_payment');
+    const alertBox = document.getElementById('payment-alert');
+    if (pending) {
+      alertBox.innerHTML = `
+        <div class="alert alert-warning" role="alert">
+          <div class="d-flex">
+            <div><strong>Есть заявка, ожидающая оплаты.</strong> Выбор способа оплаты не списывает деньги — откройте заявку и подтвердите платёж только после проверки деталей.</div>
+          </div>
+          <div class="mt-2"><a href="application.html?id=${encodeURIComponent(pending.id)}" class="btn btn-sm btn-outline-warning">Проверить</a></div>
+        </div>`;
+    } else {
+      alertBox.innerHTML = '';
+    }
+
+    const tbody = document.getElementById('applications-tbody');
+    if (!list.length) {
+      tbody.innerHTML = `<tr><td colspan="6" class="text-secondary text-center py-4">Заявок с таким статусом нет</td></tr>`;
+    } else {
+      tbody.innerHTML = list
+        .map((a) => {
+          const meta = CabinetData.STATUS_META[a.status] || CabinetData.STATUS_META.draft;
+          const applicantsHtml = a.applicants
+            .map((n) => `<span class="badge bg-secondary-lt">${escapeHtml(n)}</span>`)
+            .join(' ');
+          return `
+          <tr>
+            <td>
+              <strong>${escapeHtml(a.id)}</strong>
+              <div class="text-secondary small">${escapeHtml(a.createdLabel)}</div>
+            </td>
+            <td>
+              <strong>${escapeHtml(a.country)}</strong>
+              <div class="text-secondary small">${escapeHtml(a.visaType)}</div>
+            </td>
+            <td><div class="applicants-tags">${applicantsHtml}</div></td>
+            <td>
+              <span class="badge ${meta.badge}"><span class="status-dot ${a.status}"></span>${meta.label}</span>
+              <div class="text-secondary small">${escapeHtml(a.paymentMethod)}</div>
+            </td>
+            <td><strong>${a.cost.toLocaleString('ru-RU')} ₽</strong></td>
+            <td class="text-end">
+              <a href="application.html?id=${encodeURIComponent(a.id)}" class="btn btn-sm btn-outline-primary">Открыть ›</a>
+            </td>
+          </tr>`;
+        })
+        .join('');
+    }
+
+    document.getElementById('table-footer').textContent = `Показано ${list.length} из ${all.length} заявок`;
+  }
+
+  document.getElementById('status-filter').addEventListener('change', render);
+  document.addEventListener('DOMContentLoaded', render);
+  render();
+</script>
+</body>
 </html>
